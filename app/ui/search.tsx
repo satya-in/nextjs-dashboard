@@ -7,9 +7,9 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  function debounceCallback(fn: Function, delay: number = 1000) {
+  function debounceCallback<T extends string[]>(fn: (...args: T) => void, delay: number = 1000) {
     let timer: NodeJS.Timeout;
-    return function (...args: any[]) {
+    return function (...args: T) {
       if (timer) clearTimeout(timer);
       timer = setTimeout(() => fn(...args), delay)
     }
